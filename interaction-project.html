@@ -51,18 +51,24 @@
         
           function keyPressed(){ 
               //if you press any key it will change the background in to black and you can't change it back, to change it back you need to reloead the page 
+              // if you keep click the button/key you will see random lines  
               background(0)
+              
             
              fill(255)
              ellipse(300,300,100,100)
+             
+             stroke(random(0),random(255),random(255));
+             line(300,300,random(600),random(600));
         
          }
         
           function mouseMoved(){
               // everytime you move your mouse you will make lines 
-              
+              // tip>>> move the mouse inside the big eyeball,it looks Kool 
+              // but you could do anything with the mouse. you could shapes with the mouse it looks Kool as well
               strokeWeight(3)
-              stroke(random(0),random(255),random(255));
+              stroke(random(0),random(255),random(255),50);
                
               line(300,300,random(600),random(600));
              
