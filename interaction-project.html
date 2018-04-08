@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    
+    
+    
+    <script>
+        function setup() {
+            createCanvas(600,600);
+            background(200);
+        }
+
+          function draw() {
+         // its a big eyeball     
+            
+           fill(random(150),random(255),random(250),20);
+          
+           ellipse(300,300,400,400);
+          
+           ellipse(300,300,150,150);
+          
+           ellipse(275,275,50,50);
+          
+           ellipse(310,310,25,25);
+            
+         }
+        
+          function mouseDragged(){
+         // everytime you press and move your mouse you make small ellipes 
+              
+          // eyes
+           
+             diameter = (random(20));
+             
+             fill(random(150),random(255),random(250),20);
+             
+             ellipse(mouseX,mouseY,50,50);
+             
+             ellipse(mouseX,mouseY,10,10);
+             
+             ellipse(mouseX+random(-50,50),mouseY+random(-50,50),diameter,diameter);
+             
+             stroke(random(50),random(255),random(255),200);
+    
+  
+           }
+        
+          function keyPressed(){ 
+              //if you press any key it will change the background in to black and you can't change it back, to change it back you need to reloead the page 
+              background(0)
+            
+             fill(255)
+             ellipse(300,300,100,100)
+        
+         }
+        
+          function mouseMoved(){
+              // everytime you move your mouse you will make lines 
+              
+              strokeWeight(3)
+              stroke(random(0),random(255),random(255));
+               
+              line(300,300,random(600),random(600));
+             
+              
+           
+           
+            stroke(random(0),random(255),random(255),25);
+              
+              line(mouseX,mouseY, 0, 0);
+              
+              line(mouseX,mouseY,0,600);
+              
+              line(mouseX,mouseY,0,300);
+              
+              line(mouseX,mouseY,300,300);
+              
+              line(mouseX,mouseY,600,0);
+              
+              line(mouseX,mouseY,300,0);
+              
+              line(mouseX,mouseY,600,300);
+              
+              line(mouseX,mouseY,300,600);
+              
+              line(mouseX,mouseY,600,600);
+              
+           
+          }
+        
+    </script>
+</head>
+
+<body>
+
+<div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/aujoyp3568/p5js/blob/master/interaction-project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+
+</body>
+
+</html>
