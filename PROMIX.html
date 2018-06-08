@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        // global variables, able to be used in all functions
+        var ballX; // x-location of the ball
+        var ballY; // y-location of the ball
+        var ballSpeedX = 10; // speed of the ball horizontally
+        var ballSpeedY = 10; // speed of the ball vertically
+        var paddleHeight = 30; // height of the paddle
+        var paddleWidth
+        var score = 0
+        var xspace1 = 200
+        var xspace2 = 800
+        var xspace3 = 400
+        var xspace4 = 600
+        var xspace5 = 800
+        var xspace7 = 400
+
+        function setup() {
+            createCanvas(800, 600); // canvas size
+            noCursor(); // hides the mouse
+            ballX = random(width); // start the ball in the
+            ballY = random(height / 2); // top half of the canvas
+
+        }
+
+        function draw() {
+            paddleWidth = random(100, 200)
+
+            background(0); // resets the background
+            moveBall(); // ball moves in X and Y directions
+            checkCollide(); // checks for collision with walls or paddle
+            drawPaddle(); // re-draws paddle
+            drawBall(); // re-draws ball 
+
+            textSize(50)
+            fill(random(100), random(150), random(255))
+            text("score" + score, 20, 30)
+
+            space()
+
+        }
+
+
+        function moveBall() {
+            ballX = ballX + ballSpeedX; // updates ball location horizontally
+            ballY = ballY + ballSpeedY; // updates ball location vertically
+
+            // monitor speed/direction of ball
+            console.log("ballSpeedX: " + ballSpeedX + ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {
+            // left/right edges
+            if (ballX < 0 || ballX > width) {
+                ballSpeedX = ballSpeedX * -1; // switch X direction
+            }
+
+            // top edge
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1; // switch Y direction
+            }
+
+            // paddle
+            if (ballY > height - paddleHeight) { // ball is past 'goal line' vertically
+
+                if (ballX > mouseX - paddleWidth / 2 && ballX < mouseX + paddleWidth / 2) { // ball is within paddle horizontally
+                    ballSpeedY = ballSpeedY * -1; // switch Y direction
+                    score++
+
+                }
+                // text("score"+score,20,30)
+                // score ++
+                else { // ball is on the left or right side of the paddle
+                    text("GAME OVER!", width / 2, height / 2);
+                    noLoop(); // stop the draw loop
+
+                }
+
+            }
+
+        }
+
+        function drawBall() {
+            fill(random(255), random(0), random(100))
+            noStroke(); // no outline
+            ellipse(ballX, ballY, random(35), random(35)); // draw a small ball at the current (x,y) location
+            fill(0)
+            ellipse(ballX, ballY, 10, 10)
+        }
+
+        function drawPaddle() {
+
+            strokeWeight(4); // border thickness of 4px
+            fill(20, 250, 200, )
+            // rectangle y-value is always at the bottom, but shifted up the height of paddle and the border of paddle
+            rectMode(CENTER);
+            rect(mouseX, height - paddleHeight - 4, paddleWidth, random(paddleHeight));
+
+        }
+
+        function space() {
+            fill(0, 200, 255, 5)
+            //xspace3 at 200
+            ellipse(xspace1, 10, 10, 10)
+            ellipse(xspace1 + 10, 25, 25, 25)
+            ellipse(xspace1 + 10, 20, 10, 10)
+            ellipse(xspace1 + 290, 300, 25, 25)
+            ellipse(xspace1 + 90, 100, 10, 10)
+            ellipse(xspace1 + 140, 215, 25, 50)
+            ellipse(xspace1 + 175, 512, 20, 40)
+            ellipse(xspace1 + 130, 215, 50, 20)
+            ellipse(xspace1 + 550, 521, 25, 30)
+            ellipse(xspace1 + 10, 465, 23, 52)
+            ellipse(xspace1 + 10, 560, 21, 26)
+            ellipse(xspace1 + 520, 25, 32, 42)
+            ellipse(xspace1 + 570, 60, 20, 30)
+            ellipse(xspace1 + 490, 300, 30, 25)
+            ellipse(xspace1 + 580, 400, 20, 52)
+
+            xspace1--
+
+            if (xspace1 < 0) {
+                xspace1 = 800
+            }
+            
+            fill(255, 200, 244)
+            //xspace3 at 400 and small
+            ellipse(xspace3, 10, 10, 10)
+            ellipse(xspace3, 25, 5, 5)
+            ellipse(xspace3, 20, 10, 10)
+            ellipse(xspace3, 300, 5, 5)
+            ellipse(xspace3, 100, 1, 1)
+            ellipse(xspace3 - 158, 215, 5, 5)
+            ellipse(xspace3, 512, 2, 4)
+            ellipse(xspace3, 215, 5, 2)
+            ellipse(xspace3, 521, 5, 3)
+            ellipse(xspace3 - 64, 465, 3, 5)
+            ellipse(xspace3 - 456, 560, 2, 6)
+            ellipse(xspace3, 25, 32, 42)
+            ellipse(xspace3 - 464, 6, 2, 3)
+            ellipse(xspace3, 300, 3, 5)
+            ellipse(xspace3, 400, 2, 5)
+            xspace3--
+            if (xspace3 < 0) {
+                xspace3 = 800
+            }
+            
+            // xspace4 
+            fill(200, 255, 244)
+            ellipse(xspace3, 10, 10, 10)
+            ellipse(xspace3, 25, 5, 9)
+            ellipse(xspace3, 20, 10, 10)
+            ellipse(xspace3, 300, 5, 5)
+            ellipse(xspace3, 100, 5, 8)
+            ellipse(xspace3 - 158, 215, 5, 5)
+            ellipse(xspace3, 512, 6, 4)
+            ellipse(xspace3, 215, 5, 2)
+            ellipse(xspace3, 521, 5, 3)
+            ellipse(xspace3 - 64, 465, 3, 5)
+            ellipse(xspace3 - 456, 560, 2, 6)
+            ellipse(xspace3, 25, 3, 4)
+            ellipse(xspace3 - 464, 10, 2, 3)
+            ellipse(xspace3, 300, 3, 5)
+            ellipse(xspace3, 400, 5, 5)
+            xspace3--
+            if (xspace3 < 0) {
+                xspace3 = 800
+            }
+
+            //xspace2 at 800
+            fill(255, 36, 100)
+            ellipse(xspace2, 10, 10, 10)
+            ellipse(xspace2, 25, 25, 25)
+            ellipse(xspace2, 20, 10, 10)
+            ellipse(xspace2, 300, 25, 25)
+            ellipse(xspace2, 100, 10, 10)
+            ellipse(xspace2 - 158, 215, 25, 50)
+            ellipse(xspace2, 512, 20, 40)
+            ellipse(xspace2, 215, 50, 20)
+            ellipse(xspace2, 521, 25, 30)
+            ellipse(xspace2 - 64, 465, 23, 52)
+            ellipse(xspace2 - 456, 560, 21, 26)
+            ellipse(xspace2, 25, 32, 42)
+            ellipse(xspace2 - 464, 60, 20, 30)
+            ellipse(xspace2, 300, 30, 25)
+            ellipse(xspace2, 400, 20, 52)
+            xspace2--
+            if (xspace2 < 0) {
+                xspace2 = 1000
+            }
+            
+            fill(0, 50, 255)
+            // xspace5
+            ellipse(xspace5 + 8, 10, 10, 10)
+            ellipse(xspace5 + 10, 25, 5, 5)
+            ellipse(xspace5 + 10, 20, 10, 10)
+            ellipse(xspace5 + 290, 300, 5, 5)
+            ellipse(xspace5 + 90, 100, 10, 5)
+            ellipse(xspace5 + 140, 215, 25, 5)
+            ellipse(xspace5 + 175, 512, 20, 4)
+            ellipse(xspace5 + 130, 215, 5, 20)
+            ellipse(xspace5 + 550, 521, 25, 30)
+            ellipse(xspace5 + 10, 465, 23, 5)
+            ellipse(xspace5 + 10, 560, 21, 9)
+            ellipse(xspace5 + 520, 25, 32, 4)
+            ellipse(xspace5 + 570, 60, 20, 8)
+            ellipse(xspace5 + 490, 300, 30, 25)
+            ellipse(xspace5 + 580, 400, 20, 52)
+            xspace5--
+            if (xspace2 < 0) {
+                xspace2 = 1000
+            }
+
+
+            fill(200, 20, 244)
+            //xspace6
+            ellipse(xspace7, 10 * 3, 10, 10)
+            ellipse(xspace7, 5 * 3, 5, 9)
+            ellipse(xspace7, 10, 10, 10)
+            ellipse(xspace7, 150, 5, 5)
+            ellipse(xspace7, 200, 5, 8)
+            ellipse(xspace7 - 158, 215, 5, 5)
+            ellipse(xspace7, 582, 6, 4)
+            ellipse(xspace7, 255, 5, 2)
+            ellipse(xspace7, 500, 5, 3)
+            ellipse(xspace7 - 54, 465, 3, 5)
+            ellipse(xspace7 - 456, 560, 2, 6)
+            ellipse(xspace7, 250, 3, 4)
+            ellipse(xspace7 - 464, 10, 2, 3)
+            ellipse(xspace7, 200, 3, 5)
+            ellipse(xspace7, 450, 5, 5)
+            xspace7--
+            if (xspace7 < 0) {
+                xspace7 = 801
+            }
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/aujoyp3568/p5js/blob/master/PROMIX.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
